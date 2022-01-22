@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "build", "config", "webpack", "jest"],
+  "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": "./",
+      "composite": true,
+      "module": "esnext",
+      "outDir": "build/dist",
+      "rootDir": "src",
+      "skipLibCheck": true,
+      "esModuleInterop": true
+  }
+}
