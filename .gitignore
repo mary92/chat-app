@@ -1,0 +1,104 @@
+_ReSharper*
+[Bb]in
+obj
+objd
+out/
+tmp/
+Logs/
+target/
+App_Data
+*.user
+*.sln.cache
+.bin
+.drivers
+dist.stats.json
+bower_components
+node_modules
+temp
+lib
+lib-amd
+lib-es5
+coverage
+dist
+npm-debug.log
+npm-debug.log.*
+pnpm-debug.log
+pnpm-debug.log.*
+npminstall-log.txt
+test-dependencies
+screenshots
+*.suo
+*.out
+TestResults
+[Tt]humbs.db
+buildd.*
+build.*
+!build.props
+*.0x
+# NPM Install Temp
+__temp/
+
+# Deploy symlinks
+_Deploy
+
+# Commit meta data
+commit.txt
+# Package output folder
+package
+
+# Log/bak files from building
+*.log
+*.bak
+
+private/
+OACRTemp/
+build_logs/
+lock
+/public/inc/bldver.*
+/public/inc/sources.ver
+/public/inc/version.htm
+/data
+.corext/gen/
+registered_data.ini
+_NCrunch*
+StyleCop.Cache
+*.ide
+
+# quickbuild.exe
+/VersionGeneratingLogs/
+VersionGeneration/
+QLogs
+QLocal
+QTestLogs
+__cacheOutput
+
+# bad tlb/chm generators in nmake tree
+*.tlb
+*.chm
+
+# dumb silverlight
+ClientBin/
+
+# dump azure
+*.build.csdef
+csx/
+
+/*.buildlog
+/*.ProjectImports.zip
+
+# Rush temp files.
+common/temp
+
+# Ignore changes to .npmrc so that the build agent
+# doesn't check in an auth token on CI
+common/config/rush/.npmrc
+common/config/rush/.npmrc-publish
+
+# Build info files
+*.tsbuildinfo
+
+# Storybook build
+scripts/storybook-static
+
+# e2e junit report
+junit-e2e.xml
