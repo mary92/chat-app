@@ -26,8 +26,9 @@ const useStyles = makeStyles((_theme: Theme) => createStyles({
 
 const ChatLayoutInternal = (props: IChatLayoutProps): JSX.Element => {
     const classes = useStyles();
+    const resultData = props.store.chatBubblesDataInitial.concat(props.store.chatBubblesDataDiff).reverse();
 
-    const chatBubbles = props.store.chatBubblesData.map((obj, i = 0) => (
+    const chatBubbles = resultData.map((obj, i = 0) => (
         <div className={`${classes.bubbleContainer}`}
             style={{ justifyContent: obj.direction === "right" ? 'flex-end' : 'flex-start' }}
             key={i} >

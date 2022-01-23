@@ -2,6 +2,8 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { Button, TextField } from '@mui/material';
+import { sendMessageRequest } from '../utils/request-helper';
+import { currentUser } from '../utils/response-converter';
 
 export const MessageBar = () => {
     return <Box sx={{ bgcolor: '#3798d4', width: '100%', position: "fixed", bottom: "0px", height: "70px" }} >
@@ -13,7 +15,7 @@ export const MessageBar = () => {
             <Button variant="contained" sx={{
                 width: 72,
                 bgcolor: '#ff876d',
-            }}>Send</Button>
+            }} onClick={() => sendMessageRequest({ message: 'Hello from MM', author: currentUser })}>Send</Button>
         </Stack>
     </Box>
 }

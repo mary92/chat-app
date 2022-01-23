@@ -1,12 +1,12 @@
 import { IChatBubbleView } from "src/logic/ChatLayoutStore";
 import { IListMessageResponse } from "./request-helper";
 
-const currentUser = "Tom";
+export const currentUser = "MC";
 
 export const convertListMessageResponseToIChatBubbleViewArray = (response: IListMessageResponse): IChatBubbleView[] => {
     const chatBubbleViewArray : IChatBubbleView[] = [];
 
-    response.reverse().forEach(responseEntry => {
+    response.forEach(responseEntry => {
         chatBubbleViewArray.push({
             author: responseEntry.author,
             message: responseEntry.message,

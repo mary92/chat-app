@@ -8,14 +8,17 @@ export interface IChatBubbleView {
 }
 
 export interface IChatLayoutStore {
-    chatBubblesData: IChatBubbleView[]
+    chatBubblesDataInitial: IChatBubbleView[];
+    chatBubblesDataDiff: IChatBubbleView[];
   }
 
   export const createChatLayoutStore = (
-    chatBubblesData: IChatBubbleView[]
+    chatBubblesDataInitial: IChatBubbleView[], 
+    chatBubblesDataDiff: IChatBubbleView[]
   ): IChatLayoutStore => {
     return observable({
-        chatBubblesData
+        chatBubblesDataInitial,
+        chatBubblesDataDiff
     });
   };
 
@@ -23,7 +26,15 @@ export interface IChatLayoutStore {
 
   export const updateChatBubblesData: (
     store: IChatLayoutStore,
-    chatBubblesData: IChatBubbleView[]
-  ) => void = action((store: IChatLayoutStore,chatBubblesData: IChatBubbleView[]): void => {
-      store.chatBubblesData = chatBubblesData;
+    chatBubblesData: IChatBubbleView[],
+    allMessagesFetched: boolean
+  ) => void = action((store: IChatLayoutStore,chatBubblesData: IChatBubbleView[], allMessagesFetched: boolean): void => {
+      if (!allMessagesFetched)
+      {
+        store.chatBubblesDataInitial = chatBubblesData;
+      }
+      else
+      {
+        store.chatBubblesDataDiff = chatBubblesData;
+      }
   });
