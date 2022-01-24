@@ -39,6 +39,7 @@ const ChatLayoutInternal = (props: IChatLayoutProps): JSX.Element => {
             </div>
         </div >
     ));
+
     return <Stack sx={{ bgcolor: '#aaaaaa' }} direction='row' alignItems='center' justifyContent='center' >
         <Stack sx={{ bgcolor: '#eeeeee', height: 'calc(100vh - 70px)', maxWidth: '640px', width: '100%', bottom: "70px", overflowY: 'scroll' }}
             direction="column-reverse"
