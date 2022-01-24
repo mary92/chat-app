@@ -10,31 +10,29 @@ export interface IChatBubbleView {
 export interface IChatLayoutStore {
     chatBubblesDataInitial: IChatBubbleView[];
     chatBubblesDataDiff: IChatBubbleView[];
-  }
+}
 
-  export const createChatLayoutStore = (
-    chatBubblesDataInitial: IChatBubbleView[], 
+export const createChatLayoutStore = (
+    chatBubblesDataInitial: IChatBubbleView[],
     chatBubblesDataDiff: IChatBubbleView[]
-  ): IChatLayoutStore => {
+): IChatLayoutStore => {
     return observable({
         chatBubblesDataInitial,
         chatBubblesDataDiff
     });
-  };
+};
 
-  // Actions
+// Actions
 
-  export const updateChatBubblesData: (
+export const updateChatBubblesData: (
     store: IChatLayoutStore,
     chatBubblesData: IChatBubbleView[],
     allMessagesFetched: boolean
-  ) => void = action((store: IChatLayoutStore,chatBubblesData: IChatBubbleView[], allMessagesFetched: boolean): void => {
-      if (!allMessagesFetched)
-      {
+) => void = action((store: IChatLayoutStore, chatBubblesData: IChatBubbleView[], allMessagesFetched: boolean): void => {
+    if (!allMessagesFetched) {
         store.chatBubblesDataInitial = chatBubblesData;
-      }
-      else
-      {
+    }
+    else {
         store.chatBubblesDataDiff = chatBubblesData;
-      }
-  });
+    }
+});
