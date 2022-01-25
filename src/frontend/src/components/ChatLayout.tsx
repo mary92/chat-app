@@ -26,7 +26,7 @@ const useStyles = makeStyles((_theme: Theme) => createStyles({
 
 const ChatLayoutInternal = (props: IChatLayoutProps): JSX.Element => {
     const classes = useStyles();
-    const resultData = props.store.chatBubblesDataInitial.concat(props.store.chatBubblesDataDiff).reverse();
+    const resultData = props.store.chatBubblesDataInitial.slice().reverse();
 
     const chatBubbles = resultData.map((obj, i = 0) => (
         <div className={`${classes.bubbleContainer}`}

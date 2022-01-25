@@ -6,28 +6,45 @@ import { IListMessageResponse, listMessagesRequest } from './utils/request-helpe
 import { convertListMessageResponseToIChatBubbleViewArray } from './utils/response-converter';
 import { MessageBar } from './components/MessageBar';
 
+let firstMessagesFetched = false;
+let initialTimeStamp = Date.now();
+
 export default function App() {
   const theme = createTheme();
-  const [store] = useState(createChatLayoutStore([], []));
-  const [allMessagesFetched, setAllMessagesFetched] = useState(false);
-  const [initialTimeStamp] = useState(Date.now());
+  const [store] = useState(createChatLayoutStore([]));
 
   useEffect(() => {
     const fetchLatestMessages = async () => {
       try {
-        const listMessageResponse: IListMessageResponse = await listMessagesRequest(allMessagesFetched, initialTimeStamp);
+        // Keep fetching messages until <100 is retrieved
+        // memorize timestamp
+        let listMessageResponse: IListMessageResponse = [];
+        let numberOfResponses = 101;
+        let firstPartFetched = firstMessagesFetched;
+        let currentRequestTImestamp = initialTimeStamp;
+        while (numberOfResponses >= 100) {
+          const listMessageResponsePart: IListMessageResponse = await listMessagesRequest(firstPartFetched, currentRequestTImestamp);
+          numberOfResponses = listMessageResponsePart.length;
+          if (numberOfResponses != 0) {
+            listMessageResponse = listMessageResponse.concat(listMessageResponsePart);
+            currentRequestTImestamp =listMessageResponsePart[listMessageResponsePart.length - 1].timestamp;
+            firstPartFetched = true;
+          }
+        }
         const chatBubbleViewArray = convertListMessageResponseToIChatBubbleViewArray(listMessageResponse);
-        updateChatBubblesData(store, chatBubbleViewArray, allMessagesFetched);
-        setAllMessagesFetched(true);
+        updateChatBubblesData(store, chatBubbleViewArray);
+        firstMessagesFetched = true;
+        initialTimeStamp = currentRequestTImestamp;
       }
       catch (error) {
         console.log(`Something went wrong with data update`);
       };
     };
+
     fetchLatestMessages();
     const timer = setInterval(fetchLatestMessages, 500);
     return () => clearInterval(timer);
-  }, [allMessagesFetched, initialTimeStamp]);
+  }, []);
 
   return <ThemeProvider theme={theme}>
     <ChatLayout store={store}></ChatLayout>
