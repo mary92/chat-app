@@ -12,7 +12,7 @@ export const convertListMessageResponseToIChatBubbleViewArray = (response: IList
             message: responseEntry.message,
             timestamp: new Date(responseEntry.timestamp).toLocaleString(),
             direction: currentUser === responseEntry.author ? "right" :"left"
-          });
+          }); 
     });
 
     return chatBubbleViewArray;
