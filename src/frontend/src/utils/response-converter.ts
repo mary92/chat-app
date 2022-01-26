@@ -11,7 +11,7 @@ export const convertListMessageResponseToIChatBubbleViewArray = (response: IList
             author: responseEntry.author,
             message: responseEntry.message,
             timestamp: new Date(responseEntry.timestamp).toLocaleString(),
-            direction: currentUser === responseEntry.author ? "right" :"left"
+            origin: currentUser === responseEntry.author ? "mine" :"other"
           }); 
     });
 

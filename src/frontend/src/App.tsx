@@ -19,6 +19,7 @@ const fetchLatestMessages = async (store: IChatLayoutStore) => {
     let numberOfResponses = 101;
     let firstPartFetched = firstMessagesFetched;
     let currentRequestTImestamp = initialTimeStamp;
+    // console.log("fetchLatestMessages "+new Date(initialTimeStamp) + " firstPartFetched " + firstPartFetched);
     while (numberOfResponses >= 100) {
       const listMessageResponsePart: IListMessageResponse = await listMessagesRequest(firstPartFetched, currentRequestTImestamp);
       numberOfResponses = listMessageResponsePart.length;
@@ -49,9 +50,11 @@ export default function App() {
   const [store] = useState(createChatLayoutStore([]));
 
   useEffect(() => {
-    fetchLatestMessages(store);
-    const timer = setInterval(() =>fetchLatestMessages(store), 500);
-    return () => clearInterval(timer);
+    fetchLatestMessages(store)
+      .then(() => {
+        setInterval(() => fetchLatestMessages(store), 500);
+        // return () => clearInterval(timer);
+      });
   }, []);
 
   return <ThemeProvider theme={theme}>

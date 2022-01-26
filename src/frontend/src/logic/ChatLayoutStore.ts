@@ -4,7 +4,7 @@ export interface IChatBubbleView {
     author: string;
     message: string;
     timestamp: string;
-    direction: string;
+    origin: string;
 }
 
 export interface IChatLayoutStore {
