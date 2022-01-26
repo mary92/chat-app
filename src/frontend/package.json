@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Chat app",
   "scripts": {
+    "azure": "set NODE_OPTIONS=--openssl-legacy-provider && npm run build && shx rm -rf ./azure/chat-app/ && shx mkdir -p ./azure/chat-app/ && shx cp -r ./build ./azure/chat-app/",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --config webpack.config.js",
     "build-report": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --json > stats.json && webpack-bundle-analyzer --port 4200 stats.json",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && webpack serve --https --port 5000 --progress --config webpack.config.js"
@@ -29,6 +30,7 @@
     "html-webpack-plugin": "^4.5.2",
     "mobx": "latest",
     "mobx-react": "latest",
+    "shx": "^0.3.3",
     "ts-loader": "^6.2.1",
     "typescript": "^3.4.3",
     "url-loader": "^4.1.1",

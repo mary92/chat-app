@@ -37,20 +37,24 @@ const ChatLayoutInternal = (props: IChatLayoutProps): JSX.Element => {
     const classes = useStyles();
     const resultData = props.store.chatBubblesDataInitial.slice().reverse();
 
-    const chatBubbles = resultData.map((obj, i = 0) => (
-        <div className={`${classes.bubbleContainer}`}
-            style={{ justifyContent: obj.origin === "mine" ? 'flex-end' : 'flex-start' }}
-            key={i} >
-            <div key={i++} className={`${classes.bubble} ${obj.origin === "mine" ? classes.myBubble : ""}`}>
-                {obj.origin !== "mine" && <div>{obj.author}</div>}
+    const chatBubbles = resultData.map((obj, i = 0) => {
+        const fromCurrentUser = obj.author === props.store.currentUser;
+        return <div className={`${classes.bubbleContainer}`}
+            style={{ justifyContent: fromCurrentUser ? 'flex-end' : 'flex-start' }}
+            key={i} role={"list"}>
+            <div key={i++} className={`${classes.bubble} ${fromCurrentUser ? classes.myBubble : ""}`}
+                aria-label={`${!fromCurrentUser ? obj.author : ""} ${obj.message} ${obj.timestamp}`}
+                role={"listitem"}>
+                {!fromCurrentUser && <div>{obj.author}</div>}
                 <div>{obj.message}</div>
                 <div>{obj.timestamp}</div>
             </div>
-        </div >
-    ));
+        </div >;
+    }
+    );
 
     return <Stack direction='row' alignItems='center' justifyContent='center'
-        sx={{ marginLeft: '24px', marginRight: '24px',height: 'calc(100vh - 63px)' }}>
+        sx={{ marginLeft: '24px', marginRight: '24px' }}>
         <Stack sx={{maxWidth: '640px', width: '100%', bottom: "70px"}}
             direction="column-reverse"
         >{chatBubbles}
