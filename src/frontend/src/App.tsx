@@ -39,11 +39,12 @@ const fetchLatestMessages = async (store: IChatLayoutStore) => {
   };
 };
 
-const styles = {
-  paperContainer: {
-      backgroundImage: `url(${Image})`
-  }
-};
+// const styles = {
+//   paperContainer: {
+//     overflowY: "scroll",
+//     backgroundImage: `url(${Image})`
+//   }
+// };
 
 export default function App() {
   const theme = createTheme();
@@ -58,7 +59,10 @@ export default function App() {
   }, []);
 
   return <ThemeProvider theme={theme}>
-    <div style={styles.paperContainer}>
+    <div style={{
+    overflowY: "scroll",
+    backgroundImage: `url(${Image})`
+  }}>
       <ChatLayout store={store}></ChatLayout>
       <MessageBar></MessageBar>
     </div>

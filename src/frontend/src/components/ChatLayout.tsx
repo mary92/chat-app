@@ -23,7 +23,10 @@ const useStyles = makeStyles((_theme: Theme) => createStyles({
         display: "inline-block",
         background: "#ffffff",
         maxWidth: "420px",
-        wordWrap: "break-word"
+        wordWrap: "break-word",
+        ['@media (max-width:538px)']: {
+            maxWidth: "240px",
+        }
     },
     myBubble: {
         background: "#fcf6c5"
@@ -47,8 +50,8 @@ const ChatLayoutInternal = (props: IChatLayoutProps): JSX.Element => {
     ));
 
     return <Stack direction='row' alignItems='center' justifyContent='center'
-        sx={{ marginLeft: '24px', marginRight: '24px' }}>
-        <Stack sx={{ height: 'calc(100vh - 70px)', maxWidth: '640px', width: '100%', bottom: "70px", overflowY: 'scroll' }}
+        sx={{ marginLeft: '24px', marginRight: '24px',height: 'calc(100vh - 63px)' }}>
+        <Stack sx={{maxWidth: '640px', width: '100%', bottom: "70px"}}
             direction="column-reverse"
         >{chatBubbles}
         </Stack>
