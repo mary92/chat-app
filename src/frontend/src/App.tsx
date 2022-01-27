@@ -59,7 +59,10 @@ const AppInternal = (props: IAppProps): JSX.Element => {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
-    updateCurrentUser(props.store.chatLayoutStore, inputRef.current?.value || "");
+    if (inputRef.current?.value)
+    {
+      updateCurrentUser(props.store.chatLayoutStore, inputRef.current?.value || "");
+    }
   };
 
   useEffect(() => {
@@ -78,7 +81,7 @@ const AppInternal = (props: IAppProps): JSX.Element => {
     }}
       ref={messagesEndRef}>
       <ChatLayout store={props.store.chatLayoutStore}></ChatLayout>
-      <MessageBar></MessageBar>
+      <MessageBar chatLayoutStore={props.store.chatLayoutStore}></MessageBar>
     </div>
     {/* Helper to enter author name */}
     <div>

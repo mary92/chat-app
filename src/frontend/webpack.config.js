@@ -21,7 +21,7 @@ module.exports = {
             {
                 test: /\.(jpg|png)$/,
                 use: {
-                  loader: 'url-loader',
+                  loader: 'url-loader'
                 },
             },
         ],
@@ -32,7 +32,12 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'src', 'index.html')
+            template: path.join(__dirname, 'src', 'index.html'),            
         })
-    ]
+    ],    
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 9000
+    },
 }

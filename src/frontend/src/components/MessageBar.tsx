@@ -6,8 +6,10 @@ import { observer } from 'mobx-react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles';
+import { IChatLayoutStore } from '../logic/ChatLayoutStore';
 
 export interface IMessageBarProps {
+    chatLayoutStore: IChatLayoutStore;
 }
 
 const useStyles = makeStyles(() => ({
@@ -16,13 +18,13 @@ const useStyles = makeStyles(() => ({
     },
   }));
 
-export const MessageBarInternal = (_props: IMessageBarProps): JSX.Element => {
+export const MessageBarInternal = (props: IMessageBarProps): JSX.Element => {
     // const valueRef = useRef<HTMLInputElement>(null);
     const [message, setMessage] = React.useState('');
 
     const onSendMessageCallback = React.useCallback(() => {
         setMessage('');
-        onSendMessage(message);
+        onSendMessage(message, props.chatLayoutStore.currentUser);
       }, [message]);
 
       const classes = useStyles();
