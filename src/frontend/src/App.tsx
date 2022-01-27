@@ -8,13 +8,7 @@ import { MessageBar } from './components/MessageBar';
 import Image from './assets/images/Body.png'
 import { observer } from 'mobx-react';
 import { IAppStore } from './logic/AppStore';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import TextField from '@mui/material/TextField';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
+import { AuthorNamePopUp } from './components/AUthorNamePopUp';
 
 let firstMessagesFetched = false;
 let initialTimeStamp = Date.now();
@@ -84,30 +78,7 @@ const AppInternal = (props: IAppProps): JSX.Element => {
       <MessageBar chatLayoutStore={props.store.chatLayoutStore}></MessageBar>
     </div>
     {/* Helper to enter author name */}
-    <div>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Enter author name</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Enter your name
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Name"
-            // type="email"
-            fullWidth
-            variant="standard"
-            inputRef={inputRef}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Confirm</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <AuthorNamePopUp open={open} handleClose={handleClose} inputRef={inputRef}/>
   </ThemeProvider>
 }
 
